@@ -1,0 +1,9 @@
+/* Código para src/pages/Products/Products.css */
+.products-page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 40px 0;
+  text-transform: uppercase;
+}

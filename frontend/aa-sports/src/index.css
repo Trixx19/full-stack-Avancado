@@ -1,0 +1,21 @@
+/* Código para src/index.css */
+
+/* Reset básico e definição da fonte principal */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4; /* Um cinzento claro para o fundo */
+}
+
+/* O nosso contentor principal.
+  Limita a largura máxima do conteúdo e centra-o na página.
+*/
+.container {
+  max-width: 1200px; /* Largura máxima do conteúdo */
+  margin: 0 auto; /* Centra o contentor horizontalmente */
+  padding: 0 20px; /* Espaçamento lateral para ecrãs menores */
+}

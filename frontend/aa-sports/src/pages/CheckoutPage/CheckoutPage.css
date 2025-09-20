@@ -1,0 +1,49 @@
+/* Código para src/pages/CheckoutPage/CheckoutPage.css */
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #fff;
+  padding: 60px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  margin-top: 40px;
+}
+
+.success-icon {
+  color: #28a745; /* Verde de sucesso */
+  margin-bottom: 24px;
+}
+
+.checkout-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.checkout-message {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 500px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.back-to-home-button {
+  background-color: #0D47A1;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-to-home-button:hover {
+  background-color: #4EC3F7;
+  transform: translateY(-2px);
+}   

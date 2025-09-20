@@ -1,0 +1,66 @@
+.aa-footer {
+    background-color: #f2f2f2;
+    padding: 30px 20px 10px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #1c1c1c;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.footer-col h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.footer-col .sub {
+    color: #888;
+    font-size: 14px;
+}
+
+.footer-button {
+    margin: 10px 0;
+    padding: 8px 16px;
+    border: 2px solid #4EC3F7;
+    background: transparent;
+    color: #0D47A1;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.footer-col h5 {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.footer-col p {
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.socials {
+    display: flex;
+    gap: 12px;
+    font-size: 20px;
+    color: #0D47A1;
+    margin-bottom: 12px;
+}
+
+.footer-app {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.footer-app p.sub {
+    font-size: 13px;
+    color: #666;
+}
+

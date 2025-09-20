@@ -1,0 +1,69 @@
+/* CÓDIGO CORRIGIDO para src/components/card/ProductCard.css */
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.product-info {
+  text-align: center;
+  width: 100%;
+}
+
+.product-card h3 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.price { /* Usei a classe 'price' que está no seu HTML original */
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 16px;
+}
+
+/* AQUI ESTÁ A CORREÇÃO:
+  Mudei de '.add-to-cart-button' para '.btn-add',
+  que é a classe que o seu botão realmente usa no ficheiro ProductCard.js.
+*/
+.btn-add {
+  background-color: #0D47A1; /* Azul escuro da sua logo */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 50%; /* Ocupa toda a largura do cartão */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: #4EC3F7; /* Azul claro da sua logo no hover */
+  transform: scale(1.05);
+}

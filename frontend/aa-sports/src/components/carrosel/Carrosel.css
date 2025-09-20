@@ -1,0 +1,84 @@
+.carousel-container {
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.carousel-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+}
+
+.carousel-card {
+    min-width: 100px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 12px;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.carousel-card:hover {
+    transform: translateY(-3px);
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #cddc39;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.nome {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.preco-original {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.preco-desconto {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0D47A1;
+}
+
+.parcelas {
+    font-size: 0.8rem;
+    color: #444;
+}
+
+.frete {
+    background-color: #ccff00;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-top: 6px;
+    display: inline-block;
+}

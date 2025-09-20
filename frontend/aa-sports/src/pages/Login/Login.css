@@ -1,0 +1,112 @@
+/* Container centralizado */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f7;
+  font-family: Arial, sans-serif;
+}
+
+/* Caixa principal */
+.login-box {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(8, 38, 175, 0.1);
+  padding: 40px;
+  width: 800px;
+  gap: 40px;
+}
+
+/* Colunas */
+.login-left, .login-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-right {
+  border-left: 1px solid #0D47A1 ;
+  padding-left: 40px;
+}
+
+/* Títulos */
+.login-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.login-input {
+  border: 1px solid #0745c9;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #0D47A1 ;
+  box-shadow: 0 0 0 2px rgba(90,24,154,0.2);
+}
+
+/* Password com ícone */
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Link esqueci senha */
+.forgot-password {
+  font-size: 13px;
+  color: #0745c9;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Botões */
+.btn-primary {
+  background: #0D47A1;
+  color: #fff;
+  font-weight: bold;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: #0D47A1
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0745c9;
+  border: 2px solid #0D47A1;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-outline:hover {
+  background: #e8fff1;
+}
