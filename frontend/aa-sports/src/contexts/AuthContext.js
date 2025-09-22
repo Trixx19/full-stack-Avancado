@@ -1,47 +1,44 @@
+// Conteúdo para frontend/aa-sports/src/contexts/AuthContext.js
+
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
-// Ele vai armazenar as informações do usuário logado e as funções de login/logout.
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
-//Cria o Provedor (AuthProvider)
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token')); // Carrega o token do localStorage
 
+  // Efeito para carregar dados do usuário se um token existir
   useEffect(() => {
-    // Tenta encontrar dados de usuário no localStorage do navegador.
-    // Isso serve para manter o usuário logado mesmo que ele feche e abra o navegador.
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    if (storedUser && token) {
       setUser(JSON.parse(storedUser));
     }
-  }, []);
+  }, [token]);
 
-  // Função para fazer login
-  const login = (userData) => {
+  const login = (userData, userToken) => {
     localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('token', userToken);
     setUser(userData);
+    setToken(userToken);
   };
 
-  // Função para fazer logout
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
+    setToken(null);
   };
 
-  // Objeto que será compartilhado com todos os componentes
-  const value = {
-    user, 
-    isAuthenticated: !!user,
-    login,
-    logout,
-  };
+  const isAuthenticated = !!token; // Verdadeiro se o token existir
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
+  return (
+    <AuthContext.Provider value={{ user, token, login, logout, isAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-// 3. Hook customizado (useAuth)
-// É uma forma mais fácil para os outros componentes acessarem os dados do contexto.
-export function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext);
-}
-
+};
