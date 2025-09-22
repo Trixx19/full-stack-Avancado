@@ -3,13 +3,13 @@ const prisma = new PrismaClient();
 
 
 function generateSku(name, index) {
-    if (!name) throw new Error(`Produto sem name no índice ${index}`);
+    if (!name) throw new Error(`Produto sem nome no índice ${index}`);
     return name
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .toUpperCase()
         .replace(/[^A-Z0-9]+/g, "-")
-        .replace(/-+$/, "") + "-" + index;
+        .replace(/-+$/, "") + "-" + (index + 1);
 }
 
 
@@ -339,15 +339,43 @@ const products = [
 ];
 
 async function main() {
+    console.log('Limpando dados antigos...');
+    await prisma.orderItem.deleteMany();
+    await prisma.order.deleteMany();
+    await prisma.product.deleteMany();
+    await prisma.user.deleteMany();
+    console.log('Dados antigos limpos.');
+
+    console.log('Criando usuários de teste...');
+    const userCliente = await prisma.user.create({
+        data: {
+            email: 'cliente@aasports.com',
+            name: 'Cliente Teste',
+            password: '123',
+            role: 'USER',
+        },
+    });
+
+    const userVendedor = await prisma.user.create({
+        data: {
+            email: 'vendedor@aasports.com',
+            name: 'Vendedor Teste',
+            password: '123',
+            role: 'ADMIN',
+        },
+    });
+    console.log('Usuários de teste criados:', { userCliente, userVendedor });
+
+    console.log(`Iniciando o seed com ${products.length} produtos...`);
     for (const [index, p] of products.entries()) {
-        await prisma.product.upsert({
-            where: { sku: generateSku(p.name, index + 1) },
-            update: {},
-            create: {
-                sku: generateSku(p.name, index + 1),
+        const sku = generateSku(p.name, index);
+        await prisma.product.create({
+            data: {
+                sku: sku,
                 name: p.name,
                 price: p.price,
-                stock: 10
+                stock: 20,
+                image: `${index + 1}.jpg`
             }
         });
     }
@@ -356,7 +384,7 @@ async function main() {
 
 main()
     .catch((e) => {
-        console.error(e);
+        console.error("Ocorreu um erro no script de seed:", e);
         process.exit(1);
     })
     .finally(async () => {
