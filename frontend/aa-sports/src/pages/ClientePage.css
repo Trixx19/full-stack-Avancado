@@ -1,0 +1,103 @@
+.cliente-container {
+  background: #f7f7f7;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Banner */
+.cliente-banner {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.cliente-banner img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Botão Sair sobre o banner */
+.cliente-banner .btn-sair {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #fff;
+  color: #0D47A1;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cliente-banner .btn-sair:hover {
+  background: #e8eaf6;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #0D47A1;
+  font-weight: bold;
+}
+
+.compras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.compra-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.compra-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-img img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-info {
+  padding: 15px;
+}
+
+.card-info h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #0D47A1;
+}
+
+.card-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+}
+
+.status.entregue { background: #4caf50; }
+.status.emtransporte { background: #ff9800; }
+.status.preparandoenvio { background: #f44336; }
+

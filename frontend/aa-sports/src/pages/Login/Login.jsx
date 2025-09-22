@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
@@ -50,9 +50,10 @@ export default function Login() {
             onChange={(e) => setSenha(e.target.value)}
           />
 
-          <a href="#" className="forgot-password">
+          {/* Link atualizado */}
+          <Link to="/recuperar-senha" className="forgot-password">
             Esqueci minha senha
-          </a>
+          </Link>
 
           <button onClick={handleLogin} className="btn-primary">
             ACESSAR CONTA
