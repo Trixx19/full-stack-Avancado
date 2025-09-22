@@ -1,12 +1,29 @@
-import React, { useState } from "react";
-import { products } from "../../data/Products"; // <- seu array manual
+import React, { useState, useEffect } from "react";
 import ProductCard from "../card/ProductCard";
 import "./ProductList.css";
 
 export default function ProductList() {
-    const itemsPerPage = 20;
+    // Estado para armazenar os produtos buscados do backend
+    const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20;
 
+    // useEffect para buscar os dados da API quando o componente for montado
+    useEffect(() => {
+        // A URL da sua API backend que criamos
+        const apiUrl = 'http://localhost:3001/api/products';
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                setProducts(data); // Armazena os produtos no estado
+            })
+            .catch(error => {
+                console.error("Erro ao buscar produtos do backend:", error);
+            });
+    }, []); // O array vazio [] significa que este efeito roda apenas uma vez
+
+    // Lógica de paginação (continua a mesma)
     const totalPages = Math.ceil(products.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentItems = products.slice(startIndex, startIndex + itemsPerPage);
@@ -19,6 +36,7 @@ export default function ProductList() {
         <div className="product-section">
             <div className="product-grid">
                 {currentItems.map((product) => (
+                    // O product.image aqui deve corresponder ao nome do arquivo na sua pasta public/images/products
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
@@ -45,3 +63,4 @@ export default function ProductList() {
         </div>
     );
 }
+

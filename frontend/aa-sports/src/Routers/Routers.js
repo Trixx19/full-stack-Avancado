@@ -5,9 +5,10 @@ import Products from "../pages/Products/Products";
 import CartPage from "../pages/Cartpage/CartPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"; 
 import Suplementos from "../pages/Suplementos/Suplementos"; 
-import Login from "../pages/Login/Login"; // ✅ nova importação
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register"; // Importar a nova página
 
-// Novas páginas
+// Páginas de perfis
 import ClientePage from "../pages/ClientePage";
 import VendedorPage from "../pages/VendedorPage";
 import AdicionarProduto from "../pages/AdicionarProduto";
@@ -20,7 +21,10 @@ const Routers = () => {
       <Route path="/carrinho" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/suplementos" element={<Suplementos />} />
-      <Route path="/login" element={<Login />} /> {/* ✅ nova rota */}
+      
+      {/* Rotas de Autenticação */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} /> {/* Adicionar a nova rota */}
 
       {/* Rotas de cliente e vendedor */}
       <Route path="/cliente/:id" element={<ClientePage />} />
