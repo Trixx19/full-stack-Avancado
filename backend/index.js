@@ -308,8 +308,6 @@ app.put('/api/orders/:id/cancel', authenticateToken, async (req, res) => {
         data: { status: `CANCELADA_POR_${req.user.perfil}` },
     });
 
-    // Opcional: Adicionar lógica para retornar os produtos ao estoque aqui.
-
     res.json(canceledOrder);
 });
 

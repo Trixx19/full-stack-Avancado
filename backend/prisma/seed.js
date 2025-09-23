@@ -1,7 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
+const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
-
+// Função para gerar SKU a partir do nome do produto
 function generateSku(name, index) {
     if (!name) throw new Error(`Produto sem nome no índice ${index}`);
     return name
@@ -347,21 +348,25 @@ async function main() {
     console.log('Dados antigos limpos.');
 
     console.log('Criando usuários de teste...');
+    // Criptografando as senhas antes de salvar
+    const hashedClientePassword = await bcrypt.hash('123', 10);
+    const hashedVendedorPassword = await bcrypt.hash('Ma1923', 10);
+
     const userCliente = await prisma.user.create({
         data: {
             email: 'cliente@aasports.com',
             name: 'Cliente Teste',
-            password: '123',
-            role: 'USER',
+            password: hashedClientePassword, // Senha criptografada
+            perfil: 'CLIENTE',
         },
     });
 
     const userVendedor = await prisma.user.create({
         data: {
-            email: 'vendedor@aasports.com',
+            email: 'vai.que.da.certo.2k@gmail.com',
             name: 'Vendedor Teste',
-            password: '123',
-            role: 'ADMIN',
+            password: hashedVendedorPassword, // Senha criptografada
+            perfil: 'VENDEDOR',
         },
     });
     console.log('Usuários de teste criados:', { userCliente, userVendedor });
@@ -375,7 +380,9 @@ async function main() {
                 name: p.name,
                 price: p.price,
                 stock: 20,
-                image: `${index + 1}.jpg`
+                image: `${index + 1}.jpg`,
+                // Opcional: associar produtos ao vendedor criado
+                vendedorId: userVendedor.id,
             }
         });
     }
