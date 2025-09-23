@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
-
+// Função para gerar SKU a partir do nome do produto
 function generateSku(name, index) {
     if (!name) throw new Error(`Produto sem nome no índice ${index}`);
     return name
