@@ -16,20 +16,20 @@ const JWT_SECRET = 'seu-segredo-super-secreto';
 // Esta função vai proteger as rotas. Ela verifica o token JWT enviado no cabeçalho,
 // decodifica para obter o ID do usuário e o seu perfil, e anexa ao objeto `req`.
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Formato "Bearer TOKEN"
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Formato "Bearer TOKEN"
 
-  if (token == null) {
-    return res.sendStatus(401); // Não autorizado se não houver token
-  }
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.sendStatus(403); // Proibido se o token for inválido
+    if (token == null) {
+        return res.sendStatus(401); // Não autorizado se não houver token
     }
-    req.user = user; // Anexa os dados do usuário (id, perfil) à requisição
-    next();
-  });
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403); // Proibido se o token for inválido
+        }
+        req.user = user; // Anexa os dados do usuário (id, perfil) à requisição
+        next();
+    });
 };
 
 
@@ -39,39 +39,39 @@ const authenticateToken = (req, res, next) => {
 
 // Rota de Registro de Cliente
 app.post('/api/register', async (req, res) => {
-  const { name, email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  try {
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-        perfil: 'CLIENTE', // Garante que o perfil padrão seja CLIENTE
-      },
-    });
-    res.status(201).json({ user });
-  } catch (error) {
-    res.status(400).json({ error: 'Email já cadastrado.' });
-  }
+    const { name, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+        const user = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+                perfil: 'CLIENTE', // Garante que o perfil padrão seja CLIENTE
+            },
+        });
+        res.status(201).json({ user });
+    } catch (error) {
+        res.status(400).json({ error: 'Email já cadastrado.' });
+    }
 });
 
 // Rota de Login (para Clientes e Vendedores)
 app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
-  const user = await prisma.user.findUnique({ where: { email } });
+    const { email, password } = req.body;
+    const user = await prisma.user.findUnique({ where: { email } });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    // Se o login for válido, cria um token JWT
-    const accessToken = jwt.sign(
-      { userId: user.id, perfil: user.perfil }, // Informações que vão no token
-      JWT_SECRET,
-      { expiresIn: '1h' } // Token expira em 1 hora
-    );
-    res.json({ accessToken, user }); // Envia o token e os dados do usuário
-  } else {
-    res.status(401).json({ error: 'Email ou senha inválidos.' });
-  }
+    if (user && (await bcrypt.compare(password, user.password))) {
+        // Se o login for válido, cria um token JWT
+        const accessToken = jwt.sign(
+            { userId: user.id, perfil: user.perfil }, // Informações que vão no token
+            JWT_SECRET,
+            { expiresIn: '1h' } // Token expira em 1 hora
+        );
+        res.json({ accessToken, user }); // Envia o token e os dados do usuário
+    } else {
+        res.status(401).json({ error: 'Email ou senha inválidos.' });
+    }
 });
 
 // ===============================================
@@ -110,8 +110,8 @@ app.post('/api/vendedor/register', authenticateToken, async (req, res) => {
 
 // Rota para buscar todos os produtos (pública)
 app.get('/api/products', async (req, res) => {
-  const products = await prisma.product.findMany();
-  res.json(products);
+    const products = await prisma.product.findMany();
+    res.json(products);
 });
 
 // Rota para um Vendedor criar um produto
@@ -148,7 +148,7 @@ app.put('/api/products/:id', authenticateToken, async (req, res) => {
     const { name, description, price, stock } = req.body;
 
     try {
-        const product = await prisma.product.findUnique({ where: { id: parseInt(id) }});
+        const product = await prisma.product.findUnique({ where: { id: parseInt(id) } });
 
         // Garante que um vendedor só pode editar o próprio produto
         if (product.vendedorId !== req.user.userId) {
@@ -178,8 +178,8 @@ app.delete('/api/products/:id', authenticateToken, async (req, res) => {
     }
     const { id } = req.params;
 
-     try {
-        const product = await prisma.product.findUnique({ where: { id: parseInt(id) }});
+    try {
+        const product = await prisma.product.findUnique({ where: { id: parseInt(id) } });
 
         if (product.vendedorId !== req.user.userId) {
             return res.status(403).json({ error: 'Você não tem permissão para deletar este produto.' });
@@ -223,7 +223,7 @@ app.post('/api/orders', authenticateToken, async (req, res) => {
                 data: {
                     clienteId: req.user.userId,
                     vendedorId: 1, // <<< ATENÇÃO: Definir regra para qual vendedor. Por simplicidade, fixei o vendedor 1.
-                                   // O ideal seria agrupar itens por vendedor e criar uma venda para cada.
+                    // O ideal seria agrupar itens por vendedor e criar uma venda para cada.
                     total: parseFloat(total),
                     status: 'CONCLUIDA',
                     items: {
@@ -276,9 +276,9 @@ app.get('/api/orders/vendedor', authenticateToken, async (req, res) => {
         return res.status(403).json({ error: 'Acesso negado.' });
     }
     const orders = await prisma.order.findMany({
-        include: { 
+        include: {
             cliente: true, // Inclui os dados do cliente
-            items: { include: { product: true } } 
+            items: { include: { product: true } }
         },
     });
     res.json(orders);
@@ -292,7 +292,7 @@ app.put('/api/orders/:id/cancel', authenticateToken, async (req, res) => {
     if (!order) {
         return res.status(404).json({ error: 'Venda não encontrada.' });
     }
-    
+
     // Um cliente só pode cancelar suas próprias vendas
     if (req.user.perfil === 'CLIENTE' && order.clienteId !== req.user.userId) {
         return res.status(403).json({ error: 'Acesso negado.' });
@@ -300,7 +300,7 @@ app.put('/api/orders/:id/cancel', authenticateToken, async (req, res) => {
 
     // Um vendedor pode cancelar qualquer venda (conforme requisito)
     if (req.user.perfil !== 'VENDEDOR' && req.user.perfil !== 'CLIENTE') {
-         return res.status(403).json({ error: 'Acesso negado.' });
+        return res.status(403).json({ error: 'Acesso negado.' });
     }
 
     const canceledOrder = await prisma.order.update({
@@ -317,5 +317,5 @@ app.put('/api/orders/:id/cancel', authenticateToken, async (req, res) => {
 // ===============================================
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });

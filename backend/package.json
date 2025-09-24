@@ -21,11 +21,8 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "nodemon": "^3.1.10",
     "prisma": "^6.16.2"
-=======
-    "prisma": "^5.15.0"
->>>>>>> 27736e0cf9f536b9ddc5cf202ae4048e7cc48f18
+
   }
 }
