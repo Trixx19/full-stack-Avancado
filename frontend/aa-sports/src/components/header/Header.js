@@ -36,8 +36,8 @@ function Header() {
             {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
           </NavLink>
 
-          <NavLink to="/login" className="user-link">
-            <FaUserCircle size={28} />
+          <NavLink to="/login" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Login
           </NavLink>
         </div>
       </div>
