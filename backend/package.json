@@ -14,14 +14,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.16.2",
-    "bcryptjs": "^3.0.2",
+    "@prisma/client": "^5.15.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "nodemon": "^3.1.10",
     "prisma": "^6.16.2"
+=======
+    "prisma": "^5.15.0"
+>>>>>>> 27736e0cf9f536b9ddc5cf202ae4048e7cc48f18
   }
 }
