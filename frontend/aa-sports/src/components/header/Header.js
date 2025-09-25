@@ -29,7 +29,7 @@ function Header() {
           </NavLink>
 
           
-          <NavLink to="/UserPage" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+          <NavLink to="/user" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
             User
           </NavLink>
           

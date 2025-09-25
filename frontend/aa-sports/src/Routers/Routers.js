@@ -12,7 +12,13 @@ import Register from "../pages/Register/Register"; // Importar a nova página
 import ClientePage from "../pages/ClientePage";
 import VendedorPage from "../pages/VendedorPage";
 import AdicionarProduto from "../pages/AdicionarProduto";
-import User from "../pages/User/UserPage"; // Importar o componente UserPage
+
+
+
+// import User from "../pages/User/PainelUsuarioLayout.js"; // Importar o componente UserPage
+import UserRoutes from './UserRoutes'; 
+
+
 
 const Routers = () => {
   return (
@@ -22,7 +28,9 @@ const Routers = () => {
       <Route path="/carrinho" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/suplementos" element={<Suplementos />} />
-      <Route path="/UserPage" element={<User />} /> 
+
+      <Route path="/user/*" element={<UserRoutes />} />
+
       
       {/* Rotas de Autenticação */}
       <Route path="/login" element={<Login />} />

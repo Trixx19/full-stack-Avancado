@@ -1,16 +1,21 @@
-import { Route } from "react-router-dom";
-import UserLayout from "./UserLayout";
-import Status from "./pages/Status";
-import ClientePage from "./pages/ClientePage";
-import Enderecos from "./pages/Enderecos";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-export const userRoutes = (
-    
+import PainelUsuarioLayout from '../pages/User/PainelUsuarioLayout'; 
 
-    <Route path="/user" element={<UserLayout />}>
-        <Route index element={<PainelUsuario />} />
-        <Route path="status" element={<Status />} />
-        <Route path="historico" element={<ClientePage />} />
-        <Route path="enderecos" element={<Enderecos />} />
-    </Route>
-);
+import StatusPedido from '../components/UserContent/StatusPedido';
+import Historico from '../components/UserContent/Historico';
+
+export default function UserRoutes() {
+    return (
+        <Routes>
+        <Route element={<PainelUsuarioLayout />}>
+            <Route index element={<StatusPedido />} />
+            <Route path="status" element={<StatusPedido />} />
+            <Route path="historico" element={<Historico />} />
+            {/* Adicione a rota de endereços quando tiver o componente */}
+            {/* <Route path="enderecos" element={<Enderecos />} /> */}
+        </Route>
+        </Routes>
+    );
+}

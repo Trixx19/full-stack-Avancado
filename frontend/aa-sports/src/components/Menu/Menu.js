@@ -1,13 +1,25 @@
+// src/components/Menu/Menu.js
+
 import "./Menu.css";
-import { Link } from "react-router-dom";
+// Vamos usar NavLink para poder estilizar o link ativo, é uma melhoria simples.
+import { NavLink } from "react-router-dom";
 
 export default function Menu() {
     return (
         <ul className="menu">
-            <li><Link to="/status">Status do Pedido</Link></li>
-            <li><Link to="/historico">Histórico</Link></li>
-            <li><Link to="/enderecos">Endereços</Link></li>
-            <li><Link to="/logout">Logout</Link></li>
+            {/* 👇 CADA 'to' AGORA COMEÇA COM /user/ */}
+            <li>
+                <NavLink to="/user/status">Status do Pedido</NavLink>
+            </li>
+            <li>
+                <NavLink to="/user/historico">Histórico</NavLink>
+            </li>
+            <li>
+                <NavLink to="/user/enderecos">Endereços</NavLink>
+            </li>
+            <li>
+                <NavLink to="/user/logout">Logout</NavLink>
+            </li>
         </ul>
     );
 }
