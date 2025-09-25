@@ -352,14 +352,6 @@ async function main() {
     const hashedClientePassword = await bcrypt.hash('123', 10);
     const hashedVendedorPassword = await bcrypt.hash('Ma1923', 10);
 
-    const userCliente = await prisma.user.create({
-        data: {
-            email: 'cliente@aasports.com',
-            name: 'Cliente Teste',
-            password: hashedClientePassword, // Senha criptografada
-            perfil: 'CLIENTE',
-        },
-    });
 
     const userVendedor = await prisma.user.create({
         data: {
@@ -369,6 +361,17 @@ async function main() {
             perfil: 'VENDEDOR',
         },
     });
+    
+    const userCliente = await prisma.user.create({
+        data: {
+            email: 'cliente@aasports.com',
+            name: 'Cliente Teste',
+            password: hashedClientePassword, // Senha criptografada
+            perfil: 'CLIENTE',
+        },
+    });
+
+    
     console.log('Usuários de teste criados:', { userCliente, userVendedor });
 
     console.log(`Iniciando o seed com ${products.length} produtos...`);
@@ -381,7 +384,6 @@ async function main() {
                 price: p.price,
                 stock: 20,
                 image: `${index + 1}.jpg`,
-                // Opcional: associar produtos ao vendedor criado
                 vendedorId: userVendedor.id,
             }
         });

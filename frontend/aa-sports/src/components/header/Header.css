@@ -1,112 +1,148 @@
+/* Em frontend/aa-sports/src/components/header/Header.css (NOVA VERSÃO) */
+
+/* Definindo variáveis de cores para fácil customização */
+:root {
+    --header-bg: #b0abfa;
+    --text-color: #333;
+    --primary-color: #007bff;
+    --border-color: #e9ecef;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 
 .header {
-  background-color: #0D47A1; 
-  padding: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: sticky; 
-  top: 0;
-  z-index: 1000;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    padding: 0 2rem; /* Espaçamento nas laterais */
+    position: sticky; /* Fixa o header no topo */
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Limita a largura máxima para telas grandes */
+    margin: 0 auto; /* Centraliza o container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo-link .logo-img {
-  height: 70px;
-  transition: transform 0.3s ease;
-}
-
-.logo-link:hover .logo-img {
-  transform: scale(1.1);
+    height: 45px; /* Ajuste o tamanho do logo */
+    width: auto;
+    display: block;
 }
 
 .main-nav {
-  display: flex;
-  gap: 40px; 
+    display: flex;
+    gap: 2rem; /* Espaçamento entre os links de navegação */
 }
 
 .nav-link {
-  color: white;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  padding: 8px 4px;
-  position: relative; 
-  transition: color 0.3s ease;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
 .nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #4EC3F7; 
-  transition: width 0.3s ease;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #4EC3F7; 
+    color: var(--primary-color);
 }
 
 .nav-link:hover::after {
-  width: 100%; 
+    width: 100%;
 }
 
+/* Estilo para o link ativo */
 .nav-link.active {
-  color: #4EC3F7; 
-  font-weight: bold;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 .nav-link.active::after {
-  width: 100%; 
+    width: 100%;
 }
 
 .header-icons {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* espaço entre carrinho e usuário */
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Espaçamento entre os ícones */
 }
 
 .cart-link {
-  position: relative;
+    position: relative;
 }
 
 .cart-link img {
-  height: 38px;
+    height: 28px;
+    width: auto;
 }
 
 .cart-count {
-  position: absolute;
-  top: -5px;      
-  right: -10px;   
-  background-color: #dc3545; 
-  color: white;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Estilos para a área do usuário logado */
+.user-info {
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 0.8rem;
+  gap: 15px;
+}
+
+.user-name-link {
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.user-name-link:hover {
+  color: var(--primary-color);
+}
+
+.logout-button {
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
   font-weight: bold;
-  border: 2px solid #0D47A1; 
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
 }
 
-.user-link {
+.logout-button:hover {
+  background-color: #dc3545;
   color: white;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s ease;
-}
-
-.user-link:hover {
-  color: #4EC3F7;
 }

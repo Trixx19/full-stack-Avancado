@@ -1,103 +1,190 @@
+/* Em frontend/aa-sports/src/pages/ClientePage.css (NOVA VERSÃO) */
+
+/* Define variáveis de cores para fácil customização */
+:root {
+    --cor-primaria: #f5f5f5; /* Um azul mais forte e profissional */
+    --cor-fundo: #f4f7f9;     /* Um cinza bem claro para o fundo */
+    --cor-texto: #333;       /* Cor principal do texto */
+    --cor-borda: #dee2e6;    /* Cor para bordas sutis */
+    --cor-sucesso: #28a745;   /* Verde para status de sucesso */
+    --cor-perigo: #dc3545;     /* Vermelho para alertas e cancelamentos */
+    --sombra-card: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave */
+}
+
+/* Container principal com o novo fundo */
 .cliente-container {
-  background: #f7f7f7;
-  min-height: 100vh;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+    display: flex;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna */
+    background-color: var(--cor-fundo);
+    min-height: calc(100vh - 80px); /* Ocupa a altura da tela menos o header */
 }
 
-/* Banner */
-.cliente-banner {
-  position: relative;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 30px;
+/* Barra lateral (Sidebar) com novo estilo */
+.sidebar {
+    width: 280px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-right: 1px solid var(--cor-borda);
+    color: var(--cor-texto);
+    display: flex;
+    flex-direction: column;
 }
 
-.cliente-banner img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
+.sidebar h2 {
+    font-size: 1.2rem;
+    color: var(--cor-primaria);
+    border-bottom: 2px solid var(--cor-primaria);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Botão Sair sobre o banner */
-.cliente-banner .btn-sair {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  background: #fff;
-  color: #0D47A1;
-  font-weight: bold;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+.sidebar p {
+    margin-top: 2rem;
+    color: #6c757d;
 }
 
-.cliente-banner .btn-sair:hover {
-  background: #e8eaf6;
+.sidebar h3 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: auto; /* Empurra o botão de sair para o final */
 }
 
-.section-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #0D47A1;
-  font-weight: bold;
+.sidebar button {
+    background-color: var(--cor-perigo);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 2rem;
+    transition: background-color 0.3s ease;
 }
 
-.compras-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+.sidebar button:hover {
+    background-color: #c82333;
 }
 
-.compra-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
+/* Conteúdo principal */
+.content {
+    flex-grow: 1; /* Ocupa o resto do espaço */
+    padding: 2rem 3rem;
 }
 
-.compra-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+.content h2 {
+    font-size: 2rem;
+    color: var(--cor-texto);
+    margin-top: 0;
+    margin-bottom: 2rem;
 }
 
-.card-img img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+/* Lista de pedidos */
+.pedidos-list {
+    display: grid;
+    /* Cria um grid responsivo que se ajusta ao tamanho da tela */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
 }
 
-.card-info {
-  padding: 15px;
+/* Novo design para o Card de Pedido */
+.pedido-card {
+    background-color: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card-info h3 {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #0D47A1;
+.pedido-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
-.card-info p {
-  margin: 4px 0;
-  font-size: 14px;
-  color: #333;
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--cor-borda);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
+.pedido-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--cor-primaria);
+}
+
+.pedido-card p {
+    color: #6c757d;
+    margin: 0.5rem 0;
+}
+
+.pedido-card strong {
+    color: var(--cor-texto);
+}
+
+.pedido-card h5 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.pedido-card ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.pedido-card li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+.pedido-card li:last-child {
+    border-bottom: none;
+}
+
+/* Tags de Status */
 .status {
-  display: inline-block;
-  margin-top: 10px;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
 }
 
-.status.entregue { background: #4caf50; }
-.status.emtransporte { background: #ff9800; }
-.status.preparandoenvio { background: #f44336; }
+.status.concluida {
+    background-color: var(--cor-sucesso);
+}
 
+.status.cancelada_por_cliente,
+.status.cancelada_por_vendedor {
+    background-color: var(--cor-perigo);
+}
+
+/* Botão de Cancelar */
+.cancel-button {
+    background-color: transparent;
+    color: var(--cor-perigo);
+    border: 1px solid var(--cor-perigo);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: var(--cor-perigo);
+    color: white;
+}
+
+/* Mensagem de erro e carregamento */
+.error-message {
+    color: var(--cor-perigo);
+}

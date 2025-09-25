@@ -33,9 +33,9 @@ export default function Login() {
       
       console.log('Dados recebidos do backend:', data);
       
-      login(data.user, data.accessToken); 
+      login(data);
       
-      // --- VERIFICAÇÃO CORRIGIDA PARA USAR 'perfil' ---
+      // --- VERIFICAÇÃO PARA USAR 'perfil' ---
       if (data.user.perfil === 'VENDEDOR') {
         navigate(`/vendedor/${data.user.id}`);
       } else {

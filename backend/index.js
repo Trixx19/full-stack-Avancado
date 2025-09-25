@@ -222,8 +222,7 @@ app.post('/api/orders', authenticateToken, async (req, res) => {
             const order = await tx.order.create({
                 data: {
                     clienteId: req.user.userId,
-                    vendedorId: 1, // <<< ATENÇÃO: Definir regra para qual vendedor. Por simplicidade, fixei o vendedor 1.
-                    // O ideal seria agrupar itens por vendedor e criar uma venda para cada.
+                    vendedorId: 1, 
                     total: parseFloat(total),
                     status: 'CONCLUIDA',
                     items: {

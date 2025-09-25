@@ -1,44 +1,62 @@
-// Conteúdo para frontend/aa-sports/src/contexts/AuthContext.js
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token')); // Carrega o token do localStorage
+    const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [token, setToken] = useState(null);
+    const navigate = useNavigate();
 
-  // Efeito para carregar dados do usuário se um token existir
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser && token) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, [token]);
+    const logout = useCallback(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setToken(null);
+        setUser(null);
+        setIsAuthenticated(false);
+        navigate('/');
+    }, [navigate]);
 
-  const login = (userData, userToken) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', userToken);
-    setUser(userData);
-    setToken(userToken);
-  };
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
 
-  const logout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    setUser(null);
-    setToken(null);
-  };
+        if (storedToken && storedUser) {
+            try {
+                const userData = JSON.parse(storedUser);
+                setToken(storedToken);
+                setUser(userData);
+                setIsAuthenticated(true);
+            } catch (error) {
+                console.error("Erro ao processar dados do localStorage, limpando sessão.", error);
+                logout();
+            }
+        }
+    }, [logout]);
 
-  const isAuthenticated = !!token; // Verdadeiro se o token existir
+    const login = (data) => {
+        // Esta função agora aceita o objeto 'data' corretamente
+        localStorage.setItem('token', data.accessToken);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        setToken(data.accessToken);
+        setUser(data.user);
+        setIsAuthenticated(true);
 
-  return (
-    <AuthContext.Provider value={{ user, token, login, logout, isAuthenticated }}>
-      {children}
-    </AuthContext.Provider>
-  );
+        // Redirecionamento após o login
+        if (data.user.perfil === 'CLIENTE') {
+            navigate(`/cliente/${data.user.id}`);
+        } else if (data.user.perfil === 'VENDEDOR') {
+            navigate(`/vendedor/${data.user.id}`);
+        }
+    };
+
+    return (
+        <AuthContext.Provider value={{ token, user, isAuthenticated, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
