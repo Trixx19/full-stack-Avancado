@@ -1,0 +1,15 @@
+.user-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.user-page aside {
+    width: 260px;
+    background: #0D47A1;
+    color: #fff;
+}
+
+.user-page main {
+    flex: 1;
+    padding: 2rem;
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
-import { FaUserCircle } from 'react-icons/fa';
 
 import logo from '../../assets/icons/logo/logo.png';
 import cart from '../../assets/icons/logo/cart.png';
@@ -28,6 +27,12 @@ function Header() {
           <NavLink to="/suplementos" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
             Suplementos
           </NavLink>
+
+          
+          <NavLink to="/user" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            User
+          </NavLink>
+          
         </nav>
 
         <div className="header-icons">
@@ -36,8 +41,8 @@ function Header() {
             {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
           </NavLink>
 
-          <NavLink to="/login" className="user-link">
-            <FaUserCircle size={28} />
+          <NavLink to="/login" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Login
           </NavLink>
         </div>
       </div>
@@ -46,3 +51,5 @@ function Header() {
 }
 
 export default Header;
+
+
