@@ -5,24 +5,18 @@ import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Obtém a função de login do nosso contexto
+  const { login } = useAuth(); 
 
-  // Estados para os campos de login
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
-  // Estados para os campos de registro
   const [registerName, setRegisterName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-
-  // Estado para exibir mensagens de erro
   const [error, setError] = useState("");
 
-  // Função para lidar com o envio do formulário de LOGIN
   const handleLogin = async (e) => {
-    e.preventDefault(); // Impede o recarregamento da página
-    setError(""); // Limpa erros anteriores
+    e.preventDefault(); 
+    setError(""); 
 
     try {
       const response = await fetch('http://localhost:4000/api/login', {
@@ -36,11 +30,12 @@ export default function Login() {
       if (!response.ok) {
         throw new Error(data.error || 'Erro ao tentar fazer login.');
       }
-
-      // Se o login for bem-sucedido, salva o usuário e o token
+      
+      console.log('Dados recebidos do backend:', data);
+      
       login(data.user, data.accessToken); 
       
-      // Redireciona com base no perfil do usuário retornado pela API
+      // --- VERIFICAÇÃO CORRIGIDA PARA USAR 'perfil' ---
       if (data.user.perfil === 'VENDEDOR') {
         navigate(`/vendedor/${data.user.id}`);
       } else {
@@ -51,7 +46,6 @@ export default function Login() {
     }
   };
 
-  // Função para lidar com o envio do formulário de REGISTRO
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
@@ -70,7 +64,6 @@ export default function Login() {
       }
       
       alert('Conta criada com sucesso! Por favor, faça o login.');
-      // Limpa os campos do formulário de registro
       setRegisterName('');
       setRegisterEmail('');
       setRegisterPassword('');
@@ -84,7 +77,6 @@ export default function Login() {
     <div className="login-container">
       <div className="login-box">
         
-        {/* Coluna esquerda - Login */}
         <div className="login-left">
           <h2 className="login-title">Já sou cliente</h2>
           <form onSubmit={handleLogin}>
@@ -113,7 +105,6 @@ export default function Login() {
           </form>
         </div>
 
-        {/* Coluna direita - Criar Conta */}
         <div className="login-right">
           <h2 className="login-title">Criar conta</h2>
           <form onSubmit={handleRegister}>
@@ -145,7 +136,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-       {/* Exibe a mensagem de erro, se houver */}
        {error && <p style={{ color: 'red', textAlign: 'center', marginTop: '1rem' }}>{error}</p>}
     </div>
   );
